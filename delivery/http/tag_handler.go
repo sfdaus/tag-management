@@ -40,13 +40,15 @@ func (h *TagHandler) Create(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, utils.NewInvalidInputError(errVal))
 	}
 
-	if err := h.TagUC.Create(ctx, &req); err != nil {
+	if res, err := h.TagUC.Create(ctx, &req); err != nil {
 		return c.JSON(utils.ParseHttpError(err))
+	} else {
+		return c.JSON(http.StatusCreated, map[string]interface{}{
+			"message": "Tag successfully created",
+			"data":    res,
+		})
 	}
 
-	return c.JSON(http.StatusCreated, map[string]interface{}{
-		"message": "Tag successfully created",
-	})
 }
 
 func (h *TagHandler) Update(c echo.Context) error {

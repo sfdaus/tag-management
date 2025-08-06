@@ -3,6 +3,7 @@ package domain
 import (
 	"context"
 	"prakarsa-app/transport/request"
+	"prakarsa-app/transport/response"
 )
 
 type Tag struct {
@@ -26,7 +27,7 @@ type TagRepository interface {
 
 // TagUsecase represent the tag usecase contract
 type TagUsecase interface {
-	Create(ctx context.Context, request *request.CreateTagReq) error
+	Create(ctx context.Context, request *request.CreateTagReq) (response.CreateTagRes, error)
 	Update(ctx context.Context, request *request.UpdateTagReq) error
 	Delete(ctx context.Context, request *request.DeleteTagReq) (int64, error)
 }

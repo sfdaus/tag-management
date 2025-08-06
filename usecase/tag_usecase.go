@@ -3,6 +3,7 @@ package usecase
 import (
 	"context"
 	"fmt"
+	"prakarsa-app/transport/response"
 	"time"
 
 	"prakarsa-app/domain"
@@ -27,20 +28,24 @@ func NewTagUsecase(tagRepo domain.TagRepository, redisRepo redis.RedisRepository
 	}
 }
 
-func (u *TagUsecase) Create(c context.Context, request *request.CreateTagReq) (err error) {
+func (u *TagUsecase) Create(c context.Context, request *request.CreateTagReq) (res response.CreateTagRes, err error) {
 	ctx, cancel := context.WithTimeout(c, u.ctxTimeout)
 	defer cancel()
 
 	// Create Payload
+	tagID := uuid.NewString()
 	t := true
 	tagPayload := &domain.Tag{
-		ID:          uuid.NewString(),
+		ID:          tagID,
 		Name:        request.Name,
 		Description: request.Description,
 		IsActive:    &t,
 		CreatedBy:   "TODO_created_by",
 		CreatedAt:   time.Now().Unix(),
 	}
+
+	// Response Payload
+	res.ID = tagID
 
 	err = u.tagRepo.Create(ctx, tagPayload)
 	return
