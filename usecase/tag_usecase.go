@@ -88,3 +88,19 @@ func (u *TagUsecase) Delete(c context.Context, request *request.DeleteTagReq) (r
 	rowsAffected, err = u.tagRepo.Delete(ctx, threadPayload)
 	return
 }
+
+func (u *TagUsecase) GetList(c context.Context, request *request.GetListTagReq) (res []response.GetListTagRes, meta response.MetaRes, err error) {
+	ctx, cancel := context.WithTimeout(c, u.ctxTimeout)
+	defer cancel()
+
+	res, meta, err = u.tagRepo.GetList(ctx, request)
+	return
+}
+
+func (u *TagUsecase) GetDetail(c context.Context, request *request.GetDetailTagReq) (res domain.Tag, err error) {
+	ctx, cancel := context.WithTimeout(c, u.ctxTimeout)
+	defer cancel()
+
+	res, err = u.tagRepo.GetDetail(ctx, request)
+	return
+}

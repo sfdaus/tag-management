@@ -23,6 +23,8 @@ type TagRepository interface {
 	Create(ctx context.Context, tag *Tag) error
 	Update(ctx context.Context, tag *Tag) error
 	Delete(ctx context.Context, tag *Tag) (int64, error)
+	GetList(ctx context.Context, request *request.GetListTagReq) ([]response.GetListTagRes, response.MetaRes, error)
+	GetDetail(ctx context.Context, request *request.GetDetailTagReq) (Tag, error)
 }
 
 // TagUsecase represent the tag usecase contract
@@ -30,4 +32,6 @@ type TagUsecase interface {
 	Create(ctx context.Context, request *request.CreateTagReq) (response.CreateTagRes, error)
 	Update(ctx context.Context, request *request.UpdateTagReq) error
 	Delete(ctx context.Context, request *request.DeleteTagReq) (int64, error)
+	GetList(ctx context.Context, request *request.GetListTagReq) ([]response.GetListTagRes, response.MetaRes, error)
+	GetDetail(ctx context.Context, request *request.GetDetailTagReq) (Tag, error)
 }

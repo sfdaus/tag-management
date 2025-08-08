@@ -43,3 +43,29 @@ func (request DeleteTagReq) Validate() error {
 		validation.Field(&request.ID, validation.Required),
 	)
 }
+
+// GetList request body
+type GetListTagReq struct {
+	Name     string `query:"name"`
+	IsActive *bool  `query:"is_active"`
+	PerPage  int64  `query:"per_page"`
+	Page     int64  `query:"page"`
+}
+
+func (request GetListTagReq) Validate() error {
+	return validation.ValidateStruct(
+		&request,
+	)
+}
+
+// GetDetail request body
+type GetDetailTagReq struct {
+	ID string `param:"id"`
+}
+
+func (request GetDetailTagReq) Validate() error {
+	return validation.ValidateStruct(
+		&request,
+		validation.Field(&request.ID, validation.Required),
+	)
+}
