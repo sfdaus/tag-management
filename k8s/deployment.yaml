@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
         - name: tag-api
-          image: tag-api1.0   # image lokal yang kamu import ke k3s
+          image: tag-api:1.0   # image lokal yang kamu import ke k3s
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
