@@ -1,11 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: tag-api
+  name: tag-management
   namespace: prakarsa
+  labels:
+    app: tag-management
 spec:
   type: ClusterIP
-  selector: { app: tag-api }
+  selector:
+    app: tag-management
   ports:
     - name: http
       port: 80
