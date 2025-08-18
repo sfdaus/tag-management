@@ -10,7 +10,7 @@ spec:
     - host: no-middleware-dev-api.prakarsa.id
       http:
         paths:
-          - path: /api/v1/tag-management
+          - path: /api/v1/tags
             pathType: Prefix
             backend:
               service:
