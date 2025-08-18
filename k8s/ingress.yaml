@@ -7,10 +7,10 @@ metadata:
     kubernetes.io/ingress.class: traefik
 spec:
   rules:
-    - host: tag-management.prakarsa.id
+    - host: no-middleware-dev-api.prakarsa.id
       http:
         paths:
-          - path: /
+          - path: /api/v1/tag-management
             pathType: Prefix
             backend:
               service:
