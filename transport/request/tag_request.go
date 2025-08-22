@@ -8,12 +8,14 @@ import (
 type CreateTagReq struct {
 	Name        string `json:"name"`
 	Description string `json:"description"`
+	UserID      string
 }
 
 func (request CreateTagReq) Validate() error {
 	return validation.ValidateStruct(
 		&request,
 		validation.Field(&request.Name, validation.Required),
+		validation.Field(&request.UserID, validation.Required),
 	)
 }
 
@@ -23,24 +25,28 @@ type UpdateTagReq struct {
 	Name        string `json:"name"`
 	Description string `json:"description"`
 	IsActive    *bool  `json:"is_active"`
+	UserID      string
 }
 
 func (request UpdateTagReq) Validate() error {
 	return validation.ValidateStruct(
 		&request,
 		validation.Field(&request.ID, validation.Required),
+		validation.Field(&request.UserID, validation.Required),
 	)
 }
 
 // Delete request body
 type DeleteTagReq struct {
-	ID string `param:"id"`
+	ID     string `param:"id"`
+	UserID string
 }
 
 func (request DeleteTagReq) Validate() error {
 	return validation.ValidateStruct(
 		&request,
 		validation.Field(&request.ID, validation.Required),
+		validation.Field(&request.UserID, validation.Required),
 	)
 }
 

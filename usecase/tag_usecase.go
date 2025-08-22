@@ -2,7 +2,6 @@ package usecase
 
 import (
 	"context"
-	"fmt"
 	"prakarsa-app/transport/response"
 	"time"
 
@@ -40,7 +39,7 @@ func (u *TagUsecase) Create(c context.Context, request *request.CreateTagReq) (r
 		Name:        request.Name,
 		Description: request.Description,
 		IsActive:    &t,
-		CreatedBy:   "TODO_created_by",
+		CreatedBy:   request.UserID,
 		CreatedAt:   time.Now().Unix(),
 	}
 
@@ -58,14 +57,14 @@ func (u *TagUsecase) Update(c context.Context, request *request.UpdateTagReq) (e
 	// Update Payload
 	tagPayload := &domain.Tag{
 		ID:        request.ID,
-		UpdatedBy: "TODO_updated_by",
+		UpdatedBy: request.UserID,
 		UpdatedAt: time.Now().Unix(),
 	}
 
 	if request.Name != "" {
 		tagPayload.Name = request.Name
 	}
-	fmt.Println(request)
+
 	if request.Description != "" {
 		tagPayload.Description = request.Description
 	}
